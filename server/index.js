@@ -21,6 +21,11 @@ io.on("connection", (socket) =>{
     socket.join(data);
     console.log(`Id do usuário: ${socket.id} entrou na sala: ${data}`)
   })
+
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("receive_message", data)
+  })
+
   socket.on("Desconectar", () =>{
     console.log("Usuário Desconectado", socket.id);
   })
